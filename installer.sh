@@ -36,7 +36,8 @@ pacman -S --noconfirm \
   python-click \
   python-zipp \
   python-importlib-metadata \
-  python-importlib-resources
+  python-importlib-resources \
+  python-typing-inspection
 
 echo "==> Fertig. Starte archinstall."
 python -m archinstall
