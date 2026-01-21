@@ -37,7 +37,8 @@ pacman -S --noconfirm \
   python-zipp \
   python-importlib-metadata \
   python-importlib-resources \
-  python-typing-inspection
+  python-typing-inspection \
+  python-annotated-types
 
 echo "==> Fertig. Starte archinstall."
 python -m archinstall
