@@ -40,7 +40,6 @@ pacman -S --noconfirm \
   python-typing-inspection \
   python-annotated-types \
   python-cryptography \ 
-  python-cffi \
   python-pyparted \
   python-textual 
 
