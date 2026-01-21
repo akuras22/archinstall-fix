@@ -39,7 +39,8 @@ pacman -S --noconfirm \
   python-importlib-resources \
   python-typing-inspection \
   python-annotated-types \
-  python-cryptography \ 
+  python-cryptography \
+  python-cffi \
   python-pyparted \
   python-textual 
 
