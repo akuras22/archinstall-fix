@@ -40,7 +40,9 @@ pacman -S --noconfirm \
   python-typing-inspection \
   python-annotated-types \
   python-cryptography \ 
-  python-cffi
+  python-cffi \
+  python-pyparted \
+  python-textual 
 
 echo "==> Fertig. Starte archinstall."
 python -m archinstall
