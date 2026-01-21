@@ -38,7 +38,8 @@ pacman -S --noconfirm \
   python-importlib-metadata \
   python-importlib-resources \
   python-typing-inspection \
-  python-annotated-types
+  python-annotated-types \
+  python-cryptography
 
 echo "==> Fertig. Starte archinstall."
 python -m archinstall
