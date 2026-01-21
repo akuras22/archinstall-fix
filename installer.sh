@@ -11,6 +11,7 @@ pacman -S --noconfirm \
   archinstall \
   python \
   python-pydantic \
+  python-pydantic-core \
   python-jsonschema \
   python-typing_extensions \
   python-rich \
