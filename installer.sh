@@ -2,50 +2,40 @@
 
 set -e
 
-echo "==> Preparing disk-backed pacman cache"
+echo "==> Synchronisiere Paketdatenbank"
+pacman -Sy --noconfirm
 
-# Ensure target mount exists
-mkdir -p /mnt
+echo "==> Installiere archinstall + alle benötigten Python-Module"
 
-# Create cache directory on disk
-mkdir -p /mnt/var/cache/pacman/pkg
+pacman -S --noconfirm \
+  archinstall \
+  python \
+  python-pydantic \
+  python-jsonschema \
+  python-typing_extensions \
+  python-rich \
+  python-jinja \
+  python-yaml \
+  python-requests \
+  python-setuptools \
+  python-packaging \
+  python-psutil \
+  python-attrs \
+  python-more-itertools \
+  python-platformdirs \
+  python-dateutil \
+  python-pyxdg \
+  python-charset-normalizer \
+  python-idna \
+  python-urllib3 \
+  python-certifi \
+  python-filelock \
+  python-colorama \
+  python-termcolor \
+  python-click \
+  python-zipp \
+  python-importlib-metadata \
+  python-importlib-resources
 
-# Clean tmpfs cache before bind-mount
-rm -rf /var/cache/pacman/pkg/* || true
-
-# Bind mount disk cache over tmpfs cache
-mount --bind /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
-
-echo "==> Installing required base tools"
-pacman -Sy --noconfirm python archinstall pkgfile
-
-echo "==> Updating pkgfile database"
-pkgfile --update
-
-echo "==> Starting archinstall dependency resolver loop"
-
-while true; do
-    output=$(python -m archinstall 2>&1) || true
-
-    if echo "$output" | grep -q "ModuleNotFoundError"; then
-        module=$(echo "$output" | grep -oP "No module named '\K[^']+")
-
-        echo "Missing Python module: $module"
-
-        pkg=$(pkgfile -s "/usr/lib/python*/site-packages/${module}" \
-              | head -n1 \
-              | cut -d/ -f1)
-
-        if [ -z "$pkg" ]; then
-            echo "ERROR: No Arch package provides Python module '$module'"
-            exit 1
-        fi
-
-        echo "Installing Arch package: $pkg"
-        pacman -Sy --noconfirm "$pkg"
-    else
-        echo "All Python modules resolved. Launching archinstall."
-        python -m archinstall
-        break
-    fi
-done
+echo "==> Fertig. Starte archinstall."
+python -m archinstall
